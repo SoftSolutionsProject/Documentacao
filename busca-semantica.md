@@ -558,8 +558,7 @@ flowchart TD
     F["Consulta do usuário"] --> G["QueryUnderstandingService"]
     G --> H["expandedQuery + embedding"]
     H --> I["PgVectorSearchService"]
-    I --> É
-    É --> J["Resultados lexical + semantic score"]
+    I --> J["Resultados lexical + semantic score"]
     J --> K["Rerank no backend"]
     K --> L["Top 5 resultados"]
 ```

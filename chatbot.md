@@ -233,7 +233,7 @@ flowchart TD
     B --> C["SearchTextUseCase.execute"]
     C --> D["Consulta search_index"]
     D --> E["Top resultados"]
-    É --> F["buildContext"]
+    E --> F["buildContext"]
     F --> G["OpenaiService.generateResponse"]
     G --> H["Resposta final"]
 ```
