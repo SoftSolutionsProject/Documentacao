@@ -587,8 +587,11 @@ flowchart TD
     O2 --> OUT
 ```
 
-Resumo:
+### Considerações técnicas
 
-```text
-O chatbot orquestra entendimento de linguagem, busca semântica, rotas fixas da plataforma e OpenAI para responder com base em contexto real, evitando depender apenas do conhecimento genérico do modelo.
-```
+- O `ProcessChatUseCase` concentra a orquestração do fluxo conversacional e decide quando usar resposta simples, busca semântica, navegação ou suporte humano.
+- O `QueryUnderstandingService` classifica a intenção da mensagem, calcula confiança, identifica categorias e pode gerar embedding para uso semântico.
+- A `search_index` é a principal fonte dinâmica de contexto sobre cursos e aulas, sendo consultada indiretamente pelo chatbot por meio do `SearchTextUseCase`.
+- O dicionário `PLATFORM_NAVIGATION` adiciona contexto estático de rotas da plataforma, permitindo respostas de navegação mesmo quando não há busca por curso.
+- A OpenAI não consulta diretamente o banco de dados; ela recebe um contexto textual montado pelo backend e gera a resposta final com base nesse contexto.
+- A qualidade das respostas depende da atualização da `search_index`, da disponibilidade da OpenAI e das regras de prompt que impedem a invenção de cursos ou funcionalidades.

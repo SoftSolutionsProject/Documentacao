@@ -563,8 +563,11 @@ flowchart TD
     K --> L["Top 5 resultados"]
 ```
 
-Resumo:
+### Considerações técnicas
 
-```text
-A busca semântica materializa cursos e aulas na tabela search_index, gera embeddings com OpenAI, armazena vetores com pgvector e combina ranking lexical, ranking vetorial e rerank de negócio para retornar resultados relevantes.
-```
+- A `search_index` funciona como uma camada de leitura otimizada para busca, separada das tabelas transacionais de cursos, módulos e aulas.
+- O endpoint `/search/reindex` reconstrói essa camada, gera documentos pesquisáveis e persiste os embeddings correspondentes.
+- A geração dos embeddings é feita via OpenAI, normalmente com o modelo `text-embedding-3-small`, e o vetor resultante é armazenado no PostgreSQL usando `pgvector`.
+- A consulta combina ranking vetorial, ranking lexical com `to_tsvector`/`plainto_tsquery` e ordenação por relevância.
+- O backend aplica um rerank adicional no `SearchTextUseCase`, considerando tipo do documento, categoria, termos relevantes e termos de exclusão.
+- Quando a OpenAI ou o embedding não estão disponíveis, a busca ainda pode operar em modo lexical, mas perde parte da capacidade semântica.
