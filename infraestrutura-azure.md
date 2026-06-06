@@ -4,8 +4,6 @@
 
 Este documento descreve a infraestrutura em nuvem utilizada para hospedar a plataforma SoftSolutions na Azure.
 
-O foco desta documentação é a organização dos recursos de nuvem, a relação entre eles e o fluxo de publicação da aplicação. Detalhes internos de código, regras de negócio, busca semântica e chatbot ficam em documentações específicas.
-
 ## Visão geral da arquitetura
 
 A aplicação está publicada na Azure usando uma arquitetura simples baseada em containers.
